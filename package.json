@@ -1,0 +1,17 @@
+{
+  "name": "flatware-session",
+  "version": "0.1.0",
+  "author": {
+    "name": "Pedro Teixeira",
+    "email": "pedro.teixeira@gmail.com"
+  },
+  "devDependencies": {
+    "tap": "0.3.x"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "node test"
+  }
+}
