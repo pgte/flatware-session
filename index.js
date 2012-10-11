@@ -20,16 +20,20 @@ function clear() {
   }
 }
 
-function Session(sessionCookieName, store) {
+function Session(sessionCookieName, store, path) {
 
   sessionCookieName || (sessionCookieName = 'sid');
   store || (store = MemoryStore());
+  path || (path = '/');
 
   return function handleRequest(req, res) {
     var sessionId = req.cookies && req.cookies[sessionCookieName];
-    sessionId || (sessionId = newSessionId());
 
-    res.setHeader('Set-Cookie', escape(sessionCookieName) + '=' + escape(sessionId));
+    if (! sessionId) {
+      sessionId = newSessionId();
+      res.setHeader('Set-Cookie', escape(sessionCookieName) + '=' + escape(sessionId) + '; Path=' + path);
+    }
+
 
     store(sessionId, function(err, session) {
       if (err) { return res.emit('error', err); }
